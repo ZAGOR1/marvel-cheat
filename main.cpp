@@ -5,7 +5,6 @@
 #include "main.h"
 #include "Globals.h"
 #include "memory.h"
-#include "Marvel_classes.hpp" // Ensure this include is present
 
 #ifndef M_PI
 #define M_PI 3.14159265358979323846
@@ -87,7 +86,7 @@ void Box3D(SDK::APlayerController* PlayerController, SDK::FVector Origin, SDK::F
 }
 
 namespace SDK {
-    const FVector FVector::OneVector = { 1.0f, 1.0f, 1.0f }; // Uygun deðerlerle baþlatýn	
+    const FVector FVector::OneVector = { 1.0f, 1.0f, 1.0f }; // Uygun deï¿½erlerle baï¿½latï¿½n	
 }
 
 int countnum = -1;
@@ -1046,47 +1045,10 @@ void ShitESP() {
                 Box3D(playerController, Origin, Extents, bVisible ? ImColor(0, 255, 0) : ImColor(255, 0, 0));
             }
 
-            // Fonksiyonu global düzeyde veya uygun bir namespace/sýnýf içinde tanýmlayýn.
-            void GlowRoutine(SDK::AMarvelPlayerController* pLocalPC, SDK::TArray<SDK::AActor*> players, bool flag) {
-                // Eðer ESP checkbox'larý aktif deðilse, fonksiyondan çýk.
-                if (!(Settings::ESP::bBox && Settings::ESP::bGlow))
-                    return;
-
-                // pLocalPC geçerli deðilse return; makrosu
-                CHECK_OBJ_VOIDRET(pLocalPC);
-
-                // pLocalPC->AcknowledgedPawn'u SDK::AMarvelBaseCharacter tipine cast ediyoruz.
-                auto pLocalBaseChar = CSDK::template CastAs<SDK::AMarvelBaseCharacter>(pLocalPC->AcknowledgedPawn);
-                if (!pLocalBaseChar || !pLocalBaseChar->bCharacterValid || pLocalBaseChar->bReviving)
-                    return;
-
-                // Yerel karakter için glow efektini ayarla.
-                pLocalBaseChar->ClientShowEnemyOutLine(flag);
-
-                SDK::AActor* pLocalPawn = pLocalPC->AcknowledgedPawn;
-
-                // Glow efekti durumu: flag true ise Always, false ise Unoccluded.
-                auto outlineStatus = flag
-                    ? SDK::ETeamOutlineShowStatus::ETOSS_Always
-                    : SDK::ETeamOutlineShowStatus::ETOSS_Unoccluded;
-
-                // Tüm oyuncular üzerinde döngü
-                for (SDK::AActor* pObj : players) {
-                    if (!pObj)
-                        continue;
-
-                    auto pBaseChar = CSDK::template CastAs<SDK::AMarvelBaseCharacter>(pObj);
-                    if (!pBaseChar || !pBaseChar->bCharacterValid || pObj == pLocalPawn)
-                        continue;
-
-                    // Ýsteðe baðlý: takým arkadaþlarýný yoksaymak için ek kontroller ekleyebilirsiniz.
-                    // Örneðin:
-                    // if (Settings::ESP::bIgnoreTeammates && !IsEnemy(pBaseChar, pLocalBaseChar))
-                    //     continue;
-
-                    // Mesh nesnesini alýp kontrol ediyoruz.
-
-                }
+            // Fonksiyonu global dï¿½zeyde veya uygun bir namespace/sï¿½nï¿½f iï¿½inde tanï¿½mlayï¿½n.
+               // Eï¿½er ESP checkbox'larï¿½ aktif deï¿½ilse, fonksiyondan ï¿½ï¿½k.
+                if (Settings::ESP::bBox && Settings::ESP::bGlow){
+               
             }
 
 
